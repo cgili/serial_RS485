@@ -4,23 +4,23 @@
 
 
 int main (void) {
-	system_init();
-	delay_init();
-	system_interrupt_enable_global();
-	fita_begin();
+	// system_init();
+	// delay_init();
+	// system_interrupt_enable_global();
+	// fita_begin();
 		
 	
-	while (1) {
+	// while (1) {
 			
-		// exemplo fita inteira + black	
-		fita_send_rgb_all(25,0,0);
-		delay_ms(500);		
-		fita_send_rgb_all(0,0,25);
-		delay_ms(500);		
-		fita_send_rgb_all(0,25,0);
-		delay_ms(500);	
-		fita_send_black_all();
-		delay_ms(1000);
+		// // exemplo fita inteira + black	
+		// fita_send_rgb_all(25,0,0);
+		// delay_ms(500);		
+		// fita_send_rgb_all(0,0,25);
+		// delay_ms(500);		
+		// fita_send_rgb_all(0,25,0);
+		// delay_ms(500);	
+		// fita_send_black_all();
+		// delay_ms(1000);
 		
 		
 		// exemplo polícia
@@ -44,5 +44,16 @@ int main (void) {
 		
 
 	
-	}
+	// }
+
+
+
+	
+
+
+
+
+
+
+
 }

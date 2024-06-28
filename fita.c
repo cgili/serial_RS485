@@ -6,7 +6,7 @@
  */ 
 
 #include "fita.h"
-
+#include "universal.h"
 
 
 void fita_send_rgb_all(uint8_t r, uint8_t g, uint8_t b)
