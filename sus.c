@@ -1,5 +1,5 @@
-#include <sus.h>
-#include "universal.h"
+#include <teste/sus.h>
+#include "teste/universal.h"
 
 
 void send_sus()

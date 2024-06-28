@@ -1,4 +1,4 @@
-#include "universal.h"
+#include "teste/universal.h"
 
 
 
@@ -11,7 +11,8 @@ struct {
     int read_idx; // Index to read the next packet
 } va;
 
-bool serial_wait_response(serial_packet_t *data) {
+bool serial_wait_response(serial_packet_t *data)
+{
     if (va.read_idx != va.write_idx) { // Check if there is data to be processed
         if (va.new_data[va.read_idx]) {
             memcpy(data, &va.packet_rx[va.read_idx], sizeof(serial_packet_t));
@@ -23,23 +24,25 @@ bool serial_wait_response(serial_packet_t *data) {
     return false;
 }
 
-static uint16_t serial_crc_calc(serial_packet_t *packet) {
-    uint16_t crc = 0xFFFF;
-    int size = packet->size + 4; // Inclui type, addr, cmd e size
 
-    // Acessa os bytes do pacote como um array de bytes
-    uint8_t *packet_bytes = (uint8_t *)packet;
+// static uint16_t serial_crc_calc(serial_packet_t *packet)
+// {
+//     uint16_t crc = 0xFFFF;
+//     int size = packet->size + 4; // Inclui type, addr, cmd e size
 
-    for (int i = 0; i < size; i++) {
-        crc ^= packet_bytes[i];
-        for (int j = 0; j < 8; j++) {
-            if (crc & 0x0001) {
-                crc >>= 1;
-                crc ^= 0xA001;
-                } else {
-                crc >>= 1;
-            }
-        }
-    }
-    return crc;
-}
+//     // Acessa os bytes do pacote como um array de bytes
+//     uint8_t *packet_bytes = (uint8_t *)packet;
+
+//     for (int i = 0; i < size; i++) {
+//         crc ^= packet_bytes[i];
+//         for (int j = 0; j < 8; j++) {
+//             if (crc & 0x0001) {
+//                 crc >>= 1;
+//                 crc ^= 0xA001;
+//                 } else {
+//                 crc >>= 1;
+//             }
+//         }
+//     }
+//     return crc;
+// }

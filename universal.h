@@ -1,11 +1,9 @@
-#ifndef UNIVERSAL_H_
-#define UNIVERSAL_H_
-
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 //#include <asf>
+
 
 
 #define MAX_RX_BUFFER_SIZE 8
@@ -33,11 +31,9 @@ typedef struct
 
 
 
-
+// static uint16_t serial_crc_calc(serial_packet_t *packet);
 void serial_begin(void);
 bool serial_write_data(serial_packet_t * packet);
 bool serial_wait_response(serial_packet_t * packet);
 bool serial_tx_busy(void);
-static uint16_t serial_crc_calc(serial_packet_t *packet);
 
-#endif

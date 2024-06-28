@@ -1,5 +1,5 @@
-#include "master.h"
-#include "universal.h"
+#include "teste/master.h"
+#include <teste/universal.h>
 
 
 struct {
@@ -9,6 +9,31 @@ struct {
     int write_idx; // Index to write to the next packet
     int read_idx; // Index to read the next packet
 } va;
+
+static uint16_t serial_crc_calc(serial_packet_t *packet)
+{
+    uint16_t crc = 0xFFFF;
+    int size = packet->size + 4; // Inclui type, addr, cmd e size
+
+    // Acessa os bytes do pacote como um array de bytes
+    uint8_t *packet_bytes = (uint8_t *)packet;
+
+    for (int i = 0; i < size; i++) {
+        crc ^= packet_bytes[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x0001) {
+                crc >>= 1;
+                crc ^= 0xA001;
+                } else {
+                crc >>= 1;
+            }
+        }
+    }
+    return crc;
+}
+
+
+
 
 
 void serial_begin(void)
@@ -22,7 +47,7 @@ bool serial_tx_busy() {
     return !Serial1.availableForWrite();
 }
 
-bool serial_write_data(serial_packet_t *packet) {
+bool serial_write_data(serial_packet_t * packet) {
     static uint8_t tx_buf[MAX_RX_BUFFER_SIZE + 3];
     uint16_t crc = 0;
 
@@ -108,7 +133,6 @@ static void IRQ_RX_CALLBACK() {
 
 	if (reset) 
 	{
-		//serial_reset();
 		reset = false;
 		idx = 0;
 	}
